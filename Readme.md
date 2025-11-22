@@ -21,10 +21,10 @@ This program accepts user input for weight (in kilograms) and height (in centime
 ## 🚀 How to Run
 
 1.  Ensure you have Python installed on your machine.
-2.  Save the code into a file named `bmi_calculator.py`.
+2.  Save the code into a file named `Bmi_Calculator_With_Health_Tips.py`.
 3.  Open your terminal or command prompt.
 4.  Navigate to the directory containing the file.
 5.  Run the following command:
 
 ```bash
-python bmi_calculator.py
+python Bmi_Calculator_With_Health_Tips.py
