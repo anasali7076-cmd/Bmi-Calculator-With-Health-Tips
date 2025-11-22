@@ -1,70 +1,115 @@
-def get_health_tip(bmi):
-    if bmi <= 18.4:
-        return (
-            "You are underweight.\n"
-            "Tips:\n"
-            "- Increase your calorie intake with nutritious, calorie-dense foods like nuts, dairy, and whole grains.\n"
-            "- Eat small, frequent meals to gain weight gradually.\n"
-            "- Incorporate strength training exercises to build muscle mass.\n"
-            "- Consult a healthcare provider or dietitian to rule out underlying issues."
-        )
-    elif bmi <= 24.9:
-        return (
-            "You are in a healthy weight range.\n"
-            "Tips:\n"
-            "- Maintain a balanced diet with plenty of fruits, vegetables, lean protein, and whole grains.\n"
-            "- Stay physically active with at least 150 minutes of moderate aerobic exercise weekly.\n"
-            "- Keep hydrated and get regular sleep.\n"
-            "- Continue regular health checkups to monitor wellbeing."
-        )
-    elif bmi <= 29.9:
-        return (
-            "You are overweight.\n"
-            "Tips:\n"
-            "- Reduce intake of sugary drinks, processed foods, and high-fat snacks.\n"
-            "- Increase cardiovascular exercises like walking, cycling, or swimming.\n"
-            "- Control portion sizes and focus on nutrient-dense foods.\n"
-            "- Set realistic, gradual weight-loss goals."
-        )
-    elif bmi <= 34.9:
-        return (
-            "You are in the obese category (Class I).\n"
-            "Tips:\n"
-            "- Consult a healthcare professional to develop a weight management plan.\n"
-            "- Combine a calorie-controlled diet with regular, supervised physical activity.\n"
-            "- Consider behavioral therapy or support groups.\n"
-            "- Monitor for obesity-related health issues such as diabetes and hypertension."
-        )
-    elif bmi <= 39.9:
-        return (
-            "You are in the obese category (Class II).\n"
-            "Tips:\n"
-            "- Medical evaluation is important to assess health risks.\n"
-            "- A structured diet and exercise program under medical guidance is recommended.\n"
-            "- Discuss possible medical treatments or interventions with your doctor.\n"
-            "- Mental health support may also be beneficial."
-        )
-    else:
-        return (
-            "You are in the severely obese category (Class III).\n"
-            "Tips:\n"
-            "- Immediate consultation with healthcare providers is crucial.\n"
-            "- Intensive lifestyle changes, medical treatment, and possibly surgery may be required.\n"
-            "- Regular monitoring of cardiovascular, respiratory, and metabolic health is essential.\n"
-            "- Psychological support and counseling can help manage lifestyle adjustments."
-        )
+class BMI:
+    def __init__(self, weight_kg, height_cm):
+        if weight_kg <= 0 or height_cm <= 0:
+            raise ValueError("Weight and height must be positive numbers.")
+        self.weight = weight_kg
+        self.height_m = height_cm / 100  # convert cm to meters
+        self.bmi = None
+    
+    def calculate(self):
+        self.bmi = round(self.weight / (self.height_m ** 2), 2)
+        return self.bmi
 
-def bmi_calculator():
+class HealthTips:
+    def __init__(self, bmi):
+        self.bmi = bmi
+        self.category = None
+        self.tips = None
+    
+    def categorize(self):
+        if self.bmi < 18.5:
+            self.category = "Underweight"
+        elif 18.5 <= self.bmi < 24.9:
+            self.category = "Normal weight"
+        elif 25.0 <= self.bmi < 29.9:
+            self.category = "Overweight"
+        else:
+            self.category = "Obese"
+        return self.category
+    
+    def get_tips(self):
+        if self.category == "Underweight":
+            self.tips = (
+                "Consider nutrient-rich meals to gain healthy weight.\n"
+                "Include protein-rich foods like lean meats, legumes, and dairy.\n"
+                "Increase healthy fats in your diet such as avocados, nuts, and olive oil.\n"
+                "Eat frequent small meals throughout the day.\n"
+                "Avoid empty calories from sugary drinks and junk food.\n"
+                "Engage in strength training to build muscle mass.\n"
+                "Consult a healthcare professional for personalized guidance.\n"
+                "Ensure adequate hydration and sleep."
+            )
+        elif self.category == "Normal weight":
+            self.tips = (
+                "Maintain your weight through a balanced diet and regular exercise.\n"
+                "Consume plenty of fruits, vegetables, whole grains, and lean proteins.\n"
+                "Stay hydrated by drinking enough water daily.\n"
+                "Make time for at least 150 minutes of moderate aerobic activity per week.\n"
+                "Incorporate strength training exercises twice a week.\n"
+                "Avoid smoking and limit alcohol consumption.\n"
+                "Manage stress through mindfulness or relaxation techniques.\n"
+                "Get regular health check-ups to monitor wellbeing."
+            )
+        elif self.category == "Overweight":
+            self.tips = (
+                "Increase physical activity; aim for at least 150-300 minutes of moderate exercise each week.\n"
+                "Focus on a balanced diet rich in whole foods—vegetables, fruits, lean proteins, and whole grains.\n"
+                "Limit processed foods, sugary drinks, and high-fat snacks.\n"
+                "Practice mindful eating and portion control.\n"
+                "Track your food intake and physical activity to stay motivated.\n"
+                "Drink plenty of water and reduce intake of high-calorie beverages.\n"
+                "Consider consulting a registered dietitian or nutritionist for tailored advice.\n"
+                "Ensure sufficient sleep and reduce stress which can impact weight."
+            )
+        else:  # Obese
+            self.tips = (
+                "Seek professional medical advice for comprehensive weight management.\n"
+                "Adopt a low-calorie, nutrient-dense diet focusing on whole foods.\n"
+                "Gradually increase physical activity, working up to at least 150 minutes per week.\n"
+                "Join support groups or counseling programs to stay motivated.\n"
+                "Avoid fad diets or extreme weight loss methods.\n"
+                "Monitor blood pressure, blood sugar, and cholesterol regularly.\n"
+                "Consider behavioral therapy to help with lifestyle changes.\n"
+                "Prioritize mental health, sleep quality, and stress management.\n"
+                "Work with healthcare providers to address any related health conditions."
+            )
+        return self.tips
+
+def get_user_data():
     try:
-        weight = float(input("Enter your weight in kg: "))
-        height = float(input("Enter your height in cm: "))
-        if weight <= 0 or height <= 0:
-            print("Weight and height must be positive numbers.")
-            return
-        bmi = weight / ((height / 100) ** 2)
-        print(f"Your BMI is: {bmi:.2f}")
-        print(get_health_tip(bmi))
+        weight = float(input("Enter your weight in kilograms: "))
+        height = float(input("Enter your height in centimeters: "))
+        return weight, height
     except ValueError:
-        print("Please enter valid numbers for weight and height.")
+        print("Invalid input. Please enter numeric values.")
+        return None, None
 
-bmi_calculator()
+def display_results(bmi, category, tips):
+    print(f"\nYour BMI is: {bmi}")
+    print(f"Category: {category}")
+    print("\nHealth Tips:")
+    print(tips)
+
+def main():
+    print("Welcome to the BMI Calculator with Health Tips")
+
+    weight, height = get_user_data()
+    if weight is None or height is None:
+        print("Exiting due to invalid input.")
+        return
+
+    try:
+        bmi_calculator = BMI(weight, height)
+        bmi_value = bmi_calculator.calculate()
+
+        tips_provider = HealthTips(bmi_value)
+        category = tips_provider.categorize()
+        tips = tips_provider.get_tips()
+
+        display_results(bmi_value, category, tips)
+
+    except ValueError as e:
+        print(f"Error: {e}")
+
+if __name__ == "__main__":
+    main()
