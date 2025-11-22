@@ -1,30 +1,28 @@
 # BMI Calculator with Health Tips
 
-A simple, interactive Python CLI (Command Line Interface) application that calculates a user's Body Mass Index (BMI) and provides personalized health recommendations based on the result.
+A Python-based Command Line Interface (CLI) application that calculates Body Mass Index (BMI) and provides personalized health and diet recommendations based on the results.
 
-## 📋 Description
+## 📌 Features
 
-This program accepts user input for weight (in kilograms) and height (in centimeters). It calculates the BMI using the standard formula and categorizes the result into one of six categories (Underweight, Healthy, Overweight, or Obesity Classes I-III). Based on the category, it prints actionable health and lifestyle tips.
+- **Precise Calculation**: Computes BMI using standard metric units (Weight in Kg, Height in Cm).
+- **Health Categorization**: Automatically classifies results into:
+  - Underweight
+  - Normal weight
+  - Overweight
+  - Obese
+- **Smart Health Tips**: Delivers specific, actionable advice tailored to the user's BMI category (diet, exercise, and lifestyle habits).
+- **Input Validation**: Handles errors gracefully (e.g., non-numeric inputs or negative values).
+- **OOP Structure**: Built using a modular Class-based approach (`BMI` and `HealthTips` classes) for clean and maintainable code.
 
-## ✨ Features
+## 🛠️ Prerequisites
 
-* **Accurate Calculation:** Converts height from cm to meters automatically for the BMI formula.
-* **Health Categorization:** Classifies BMI into 6 distinct levels.
-* **Actionable Advice:** Provides specific diet, exercise, and medical tips for each weight range.
-* **Error Handling:** robust input validation to ensure users enter positive, numeric values.
-
-## 🛠️ Requirements
-
-* Python 3.x
-* No external libraries required (uses standard Python I/O).
+- **Python 3.x** installed on your system.
+- No external libraries are required (uses standard Python libraries).
 
 ## 🚀 How to Run
 
-1.  Ensure you have Python installed on your machine.
-2.  Save the code into a file named `Bmi_Calculator_With_Health_Tips.py`.
-3.  Open your terminal or command prompt.
-4.  Navigate to the directory containing the file.
-5.  Run the following command:
-
-```bash
-python Bmi_Calculator_With_Health_Tips.py
+1. **Clone or Download** this repository.
+2. **Navigate** to the project folder in your terminal or command prompt.
+3. **Run the script**:
+   ```bash
+   python bmi_calculator.py
